@@ -1,14 +1,9 @@
-//import React from 'react'
+
 
 const baseMaterial = 'http://localhost:3000/api/v1/materials'
 
 export const getMaterials = () => {
-  console.log("get", this)
-  fetch( baseMaterial )
-    .then( resp => resp.json())
-    .then( json => this.setState({
-      materials: json
-    }) )
+  return fetch( baseMaterial ).then( resp =>( resp.json() ))
 }
 
 export const postMaterial = (body) => {
@@ -19,16 +14,7 @@ export const postMaterial = (body) => {
     },
     body: JSON.stringify(body)
   }
-  return fetch(baseMaterial, MaterialCreateParams).then(resp => {resp.json()})
-  .then((json) => {
-    getMaterials()
-  })
+  return fetch(baseMaterial, MaterialCreateParams)
+  .then(resp => {return resp.json()})
+  .then((json) => {return getMaterials() })
 }
-
-
-// module.exports = {
-//   getMaterials,
-//   postMaterial
-// }
-// export getMaterials
-// export postMaterial

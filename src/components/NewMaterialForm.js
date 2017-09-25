@@ -30,15 +30,4 @@ class NewMaterialForm extends React.Component {
   }
 }
 
-// const NewMaterialForm = (props) => {
-//
-//   return (
-//     <form onSubmit={props.handleSubmit}>
-//       <input placeholder="typeof"/>
-//       <input placeholder="description"/>
-//       <button type="submit">Add</button>
-//     </form>
-//   )
-// }
-
 export default NewMaterialForm

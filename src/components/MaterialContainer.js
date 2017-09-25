@@ -1,21 +1,14 @@
 import React from 'react'
 import MaterialList from './MaterialList'
 import NewMaterialForm from './NewMaterialForm.js'
-//import {getMaterials, postMaterial} from '../adapters/materials_adapter.js'
-// import postMaterial from '../adapters/materials_adapter.js'
-
-const baseMaterial = 'http://localhost:3000/api/v1/materials'
+import {getMaterials, postMaterial} from '../adapters/materials_adapter.js'
 
 export default class MaterialContainer extends React.Component {
 
-  constructor() {
-    super()
-
-    this.state = {
+    state = {
       materials: [],
       showForm: false
     }
-  }
 
   handleClick = () => {
     this.setState({
@@ -29,7 +22,9 @@ export default class MaterialContainer extends React.Component {
     const description = event.target['description'].value
     if(typeOf.length > 0 && description.length > 0) {
       const newBody = {typeof: typeOf, description: description}
-      this.postMaterial(newBody)
+      postMaterial(newBody).then( json => this.setState({
+        materials: json
+      }) )
       this.setState({
         showForm: false
       })
@@ -40,31 +35,11 @@ export default class MaterialContainer extends React.Component {
 
 
   componentDidMount = () => {
-    this.getMaterials()
+    getMaterials().then( json => this.setState({
+      materials: json
+    }) )
   }
 
-  postMaterial = (body) => {
-    const MaterialCreateParams = {
-      method: 'POST',
-      headers: {
-        'Content-Type':'application/json'
-      },
-      body: JSON.stringify(body)
-    }
-    return fetch(baseMaterial, MaterialCreateParams).then(resp => {resp.json()})
-    .then((json) => {
-      this.getMaterials()
-    })
-  }
-
-  getMaterials = () => {
-    console.log("get", this)
-    fetch( baseMaterial )
-      .then( resp => resp.json())
-      .then( json => this.setState({
-        materials: json
-      }) )
-  }
 
   render() {
     return(
