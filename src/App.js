@@ -10,7 +10,6 @@ class App extends Component {
 
   render() {
     return (
-      <Router>
         <div>
           <Menu>
             <Menu.Item as={Link} to='/'>
@@ -25,11 +24,8 @@ class App extends Component {
           </Menu>
           <Route exact path="/" render={()=> <h1>Welcome Home</h1>} />
           <Route exact path="/material" component={MaterialContainer} />
-          <Route exact path="/styles" component={StyleContainer} />
-
-
+          <StyleContainer />
         </div>
-      </Router>
     );
   }
 }

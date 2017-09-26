@@ -19,10 +19,19 @@ class NewStyleForm extends React.Component {
     })
   }
 
+  preHandle = (event) => {
+    this.setState({
+      nameOf: "",
+      description: ""
+    })
+    this.props.toggleShow()
+    this.props.handleSubmit(event)
+  }
+
   render() {
 
     return (
-      <Form onSubmit={this.props.handleSubmit}>
+      <Form onSubmit={this.preHandle}>
         <Form.Input type="text" name="nameOf" value={this.state.nameOf} onChange={this.handleName} placeholder="style name"/>
         <Form.Input type="text" name="description" value={this.state.description} onChange={this.handleDesc} placeholder="description"/>
         <Form.Button type="submit">Add</Form.Button>

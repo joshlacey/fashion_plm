@@ -9,7 +9,7 @@ class ShowStyle extends React.Component {
     this.state={
       buttonClicked: false,
       materials: [],
-      styleMats: props.styleMats
+      styleMats: props.materials
     }
 
   }
@@ -39,7 +39,7 @@ class ShowStyle extends React.Component {
   }
 
   render() {
-      console.log(this.props)
+      console.log("show props", this.props)
       const options = this.state.materials.map((m,index)=> ( <option key={index} value={m.id}>{m.typeof} - {m.description}</option> ) )
       const styleMaterials = this.state.styleMats.map((mat, index) =>
         (
