@@ -19,13 +19,15 @@ class App extends Component {
             <Menu.Item as={Link} to='/material'>
               Material
             </Menu.Item>
-            <Menu.Item as={Link} to='/style'>
-              Style
+            <Menu.Item as={Link} to='/styles'>
+              Styles
             </Menu.Item>
           </Menu>
           <Route exact path="/" render={()=> <h1>Welcome Home</h1>} />
           <Route exact path="/material" component={MaterialContainer} />
-          <Route exact path="/style" component={StyleContainer} />
+          <Route exact path="/styles" component={StyleContainer} />
+
+
         </div>
       </Router>
     );

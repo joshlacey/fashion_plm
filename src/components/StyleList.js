@@ -5,12 +5,13 @@ import { } from 'semantic-ui-react'
 
 const StyleList = (props) => {
   const styles = props.styles.map((s,index) => {
-    return <StyleItem id={s.id} styleMats={s.materials} key={index} name={s.name} description={s.description}/>})
-
+    return (
+      <StyleItem id={s.id} styleMats={s.materials} key={index} name={s.name} description={s.description}/>
+    )})
+  const styling = {display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gridAutoRows: 'minmax(200px, auto)'}
   return (
-    <ul>
-      {styles}
-    </ul>
+      <div style={styling}>{styles}</div>
+
   )
 }
 

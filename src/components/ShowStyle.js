@@ -1,10 +1,9 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import {getMaterials} from '../adapters/materials_adapter.js'
 import {updateStyle} from '../adapters/styles_adapter.js'
 import { Form, Button, Table, Select, Card, Image } from 'semantic-ui-react'
 
-class StyleItem extends React.Component {
+class ShowStyle extends React.Component {
   constructor (props) {
     super(props)
     this.state={
@@ -40,6 +39,7 @@ class StyleItem extends React.Component {
   }
 
   render() {
+      console.log(this.props)
       const options = this.state.materials.map((m,index)=> ( <option key={index} value={m.id}>{m.typeof} - {m.description}</option> ) )
       const styleMaterials = this.state.styleMats.map((mat, index) =>
         (
@@ -53,7 +53,7 @@ class StyleItem extends React.Component {
       const styling = {backgroundColor: '#e0e1e2', listStyle: 'none', padding: '20px', margin: '20px', borderRadius: '5px'}
     return (
 
-      <div style={styling}>
+      <div>
         <Card>
           <Image src="https://fashioneek.files.wordpress.com/2012/05/jacket-front.png"/>
           <Card.Content>
@@ -65,10 +65,33 @@ class StyleItem extends React.Component {
             </Card.Description>
           </Card.Content>
         </Card>
-        <Button><Link to={"/styles/" + this.props.id}>View Style</Link></Button>
+
+
+        {this.state.buttonClicked === false ?
+          <Button onClick={this.handleClick}>Add Material to style</Button> :
+            <Form onSubmit={this.handleSubmit}>
+              <Form.Field name='select' control='select' label='Material'>
+                {options}
+              </Form.Field>
+              <Form.Button type="submit">Submit</Form.Button>
+            </Form>}
+
+          <Table celled selectable>
+            <Table.Header>
+              <Table.Row>
+                <Table.HeaderCell>Material Id</Table.HeaderCell>
+                <Table.HeaderCell>Type</Table.HeaderCell>
+                <Table.HeaderCell>Description</Table.HeaderCell>
+              </Table.Row>
+            </Table.Header>
+            <Table.Body>
+              {styleMaterials}
+          </Table.Body>
+        </Table>
+
       </div>
     )
   }
 }
 
-export default StyleItem
+export default ShowStyle
